@@ -1,27 +1,10 @@
-<div id="<%= dom_id item %>">
-  <p>
-    <strong>Name:</strong>
-    <%= item.name %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= item.price %>
-  </p>
-
-  <p>
-    <strong>Tax rate:</strong>
-    <%= item.tax_rate %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= item.description %>
-  </p>
-
-  <p>
-    <strong>String:</strong>
-    <%= item.string %>
-  </p>
-
-</div>
+<tr>
+  <td><%= item.name %></td>
+  <td><%= item.price %></td>
+  <td><%= item.tax_rate %></td>
+  <td><%= item.description %></td>
+  <td class="action-cell">
+  <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-primary btn-sm' %>
+  <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+</td>
+</tr>

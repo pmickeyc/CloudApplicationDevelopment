@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "home#index"  # Keep this as your root path
 
-  get 'analytics/index', to: 'analytics#index'
+  get 'analytics', to: 'analytics#index'
 
 end
 
