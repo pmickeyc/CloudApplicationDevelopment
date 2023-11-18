@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Sales headers</h1>
+
+<div id="sales_headers">
+  <% @sales_headers.each do |sales_header| %>
+    <%= render sales_header %>
+    <p>
+      <%= link_to "Show this sales header", sales_header %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New sales header", new_sales_header_path %>

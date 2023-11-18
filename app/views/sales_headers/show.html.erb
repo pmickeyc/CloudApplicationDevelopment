@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @sales_header %>
+
+<div>
+  <%= link_to "Edit this sales header", edit_sales_header_path(@sales_header) %> |
+  <%= link_to "Back to sales headers", sales_headers_path %>
+
+  <%= button_to "Destroy this sales header", @sales_header, method: :delete %>
+</div>

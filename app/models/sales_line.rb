@@ -1,0 +1,2 @@
+class SalesLine < ApplicationRecord
+end
