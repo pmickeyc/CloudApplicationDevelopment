@@ -1,9 +1,30 @@
-<h1>New order</h1>
+<%= form_with(model: @order, local: true) do |form| %>
+  <p>
+    <%= form.label :transaction_date %><br>
+    <%= form.date_field :transaction_date %>
+  </p>
 
-<%= render "form", order: @order %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-fixed-columns table-compact">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= form.fields_for :order_lines do |item_form| %>
+          <%= render 'order_lines/order_item_fields', f: item_form %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<br>
+  <p>
+    <%= link_to 'Add Item', '#', id: 'add-item', class: 'btn btn-secondary' %>
+  </p>
 
-<div>
-  <%= link_to "Back to orders", orders_path %>
-</div>
+  <%= form.submit %>
+<% end %>

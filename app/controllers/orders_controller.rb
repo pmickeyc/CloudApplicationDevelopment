@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    5.times { @order.order_lines.build }
   end
 
   # GET /orders/1/edit
@@ -22,15 +23,10 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order.save
+      redirect_to @order, notice: 'Order was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -65,6 +61,7 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:transaction_date, :total_amount, :total_tax)
+      params.require(:order).permit(:transaction_date, order_lines_attributes: [:id, :item, :quantity, :tax_amount, :subtotal, :_destroy])
     end
+  
 end
