@@ -1,0 +1,17 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+body{
+    max-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+p{
+    color: black;
+}
+
+.page-title{
+    text-align: center;
+    padding-top: 5rem;
+}
