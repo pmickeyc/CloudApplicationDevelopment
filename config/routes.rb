@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#index'
   resources :sales_lines
   resources :sales_headers
   resources :items
