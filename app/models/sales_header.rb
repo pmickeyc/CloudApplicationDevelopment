@@ -1,2 +1,0 @@
-class SalesHeader < ApplicationRecord
-end
