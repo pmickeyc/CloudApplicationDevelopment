@@ -1,7 +1,10 @@
 <tr>
+  <td><%= order.id %></td> <!-- Added ID -->
   <td><%= order.transaction_date %></td>
   <td><%= order.total_amount %></td>
   <td class="action-cell">
     <%= link_to "Show this order", order, class: 'btn btn-primary btn-sm' %>
+    <%= link_to 'Edit', edit_order_path(order), class: 'btn btn-primary btn-sm' %>
+    <%= link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
   </td>
 </tr>

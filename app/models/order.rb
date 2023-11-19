@@ -21,5 +21,10 @@ class Order < ApplicationRecord
   def update_total_amount
     update_columns(total_amount: calculate_total_amount)
   end
+
+  private
+  def set_order
+    @order = Order.find(params[:id])
+  end
   
 end

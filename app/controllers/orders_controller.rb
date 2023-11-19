@@ -39,7 +39,6 @@ def create
 end
 
 
-
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
     respond_to do |format|

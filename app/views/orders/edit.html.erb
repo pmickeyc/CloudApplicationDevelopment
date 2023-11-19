@@ -1,4 +1,5 @@
-<%= form_with(model: @order, local: true) do |form| %>
+<%= form_with(model: @order, url: order_path(@order), local: true) do |form| %>
+  <%= hidden_field_tag :_method, 'patch' %>
   <div>
     <%= form.label :transaction_date %>
     <%= form.date_field :transaction_date %>
