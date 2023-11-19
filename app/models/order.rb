@@ -6,9 +6,10 @@ class Order < ApplicationRecord
     # Callback to update total amount before saving
     before_save :update_total_amount
 
-    private
-    def update_total_amount
-      self.total_amount = order_lines.sum(&:subtotal)
-    end
+  private
+
+  def update_total_amount
+    self.total_amount = order_lines.sum(&:subtotal)
+  end
   end
   

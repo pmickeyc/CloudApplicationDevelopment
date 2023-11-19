@@ -1,5 +1,6 @@
+<% items ||= Item.all %>
 <tr class="nested-fields">
-  <td><%= f.text_field :item %></td>
+  <td><%= f.collection_select :item_id, items, :id, :name, prompt: "Select an Item", class: "form-control" %></td>
   <td><%= f.number_field :quantity %></td>
   <td>
     <%= button_tag 'Remove', type: 'button', class: 'remove-item btn btn-danger btn-sm' %>

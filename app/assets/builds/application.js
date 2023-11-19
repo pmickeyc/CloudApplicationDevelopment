@@ -12138,31 +12138,16 @@
       }
     }
   });
-  document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("add-order-line").addEventListener("click", function(event) {
-      event.preventDefault();
-      let tableBody = document.querySelector(".table-responsive tbody");
-      let newRow = document.getElementById("order-line-template").cloneNode(true);
-      newRow.id = "";
-      newRow.style.display = "";
-      newRow.querySelectorAll("input").forEach((input) => {
-        input.value = "";
-        input.name = input.name.replace(
-          /\[\d+\]/,
-          "[" + (tableBody.children.length - 1) + "]"
-        );
-      });
-      tableBody.appendChild(newRow);
+  document.getElementById("add-order-line").addEventListener("click", function(event) {
+    event.preventDefault();
+    let tableBody = document.querySelector(".table-responsive tbody");
+    let newRow = document.getElementById("order-line-template").cloneNode(true);
+    let index = tableBody.querySelectorAll(".nested-fields").length - 1;
+    newRow.style.display = "";
+    newRow.querySelectorAll("select, input").forEach((input) => {
+      input.name = input.name.replace("[]", "[" + index + "]");
     });
-    document.addEventListener("click", function(event) {
-      if (event.target.classList.contains("remove-item")) {
-        event.preventDefault();
-        let row = event.target.closest(".nested-fields");
-        if (row) {
-          row.remove();
-        }
-      }
-    });
+    tableBody.appendChild(newRow);
   });
 })();
 /*! Bundled license information:

@@ -1,10 +1,36 @@
-<h1>Editing order</h1>
+<%= form_with(model: @order, local: true) do |form| %>
+  <div>
+    <%= form.label :transaction_date %>
+    <%= form.date_field :transaction_date %>
+  </div>
 
-<%= render "form", order: @order %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <!-- Add more headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <%= form.fields_for :order_lines do |order_line_form| %>
+          <%= render 'order_lines/order_item_fields', f: order_line_form %>
+        <% end %>
+        <tr id="order-line-template" class="nested-fields" style="display: none;">
+          <td><%= form.text_field :item, name: 'order[order_lines_attributes][][item]' %></td>
+          <td><%= form.number_field :quantity, name: 'order[order_lines_attributes][][quantity]' %></td>
+          <td>
+            <%= button_tag 'Remove', type: 'button', class: 'remove-item btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<br>
+  <p>
+    <%= link_to 'Add Order Line', '#', id: 'add-order-line', class: 'btn btn-secondary' %>
+  </p>
 
-<div>
-  <%= link_to "Show this order", @order %> |
-  <%= link_to "Back to orders", orders_path %>
-</div>
+  <%= form.submit %>
+<% end %>
