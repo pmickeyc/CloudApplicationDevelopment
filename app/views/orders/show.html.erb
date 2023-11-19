@@ -1,10 +1,39 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @order %>
+<h1>Order Details</h1>
+
+<div class="order-info">
+  <p><strong>Transaction Date:</strong> <%= @order.transaction_date.strftime("%B %d, %Y") %></p>
+  <p><strong>Total Amount:</strong> <%= number_to_currency(@order.total_amount) %></p>
+  <!-- Add more order attributes as needed -->
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-fixed-columns table-compact">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+        <!-- Add more headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_lines.each do |order_line| %>
+        <tr>
+          <td><%= order_line.item.name %></td>
+          <td><%= order_line.quantity %></td>
+          <td><%= number_to_currency(order_line.item.price) %></td>
+          <td><%= number_to_currency(order_line.subtotal) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <div>
   <%= link_to "Edit this order", edit_order_path(@order) %> |
   <%= link_to "Back to orders", orders_path %>
-
-  <%= button_to "Destroy this order", @order, method: :delete %>
+  <%= button_to "Destroy this order", @order, method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>

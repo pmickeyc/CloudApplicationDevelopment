@@ -12140,12 +12140,13 @@
   });
   document.getElementById("add-order-line").addEventListener("click", function(event) {
     event.preventDefault();
-    let tableBody = document.querySelector(".table-responsive tbody");
-    let newRow = document.getElementById("order-line-template").cloneNode(true);
-    let index = tableBody.querySelectorAll(".nested-fields").length - 1;
+    var tableBody = document.querySelector(".table-responsive tbody");
+    var newRow = document.getElementById("order-line-template").cloneNode(true);
+    var newIndex = tableBody.querySelectorAll("tr.nested-fields").length;
     newRow.style.display = "";
-    newRow.querySelectorAll("select, input").forEach((input) => {
-      input.name = input.name.replace("[]", "[" + index + "]");
+    newRow.id = "";
+    newRow.querySelectorAll("select, input").forEach(function(input) {
+      input.name = input.name.replace(/\[\d+\]/, "[" + newIndex + "]");
     });
     tableBody.appendChild(newRow);
   });

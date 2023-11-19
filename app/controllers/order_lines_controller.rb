@@ -1,6 +1,9 @@
 class OrderLinesController < ApplicationController
   before_action :set_order_line, only: %i[ show edit update destroy ]
 
+  validates :quantity, presence: true
+  validates :item_id, presence: true
+
   # GET /order_lines or /order_lines.json
   def index
     @order_lines = OrderLine.all

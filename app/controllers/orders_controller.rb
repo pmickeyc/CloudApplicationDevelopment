@@ -24,25 +24,27 @@ class OrdersController < ApplicationController
   end
 
   # POST /orders or /orders.json
-  def create
-    @order = Order.new(order_params)
-
-    if @order.save
-      # Handle successful save
-      # Add your redirect or success response here
-    else
-      # Log or handle errors
-      flash.now[:alert] = @order.errors.full_messages.to_sentence
-      render :new
-    end
+  # POST /orders or /orders.json
+def create
+  @order = Order.new(order_params)
+  if @order.save
+    @order.update_total_amount  # Call the update_total_amount method here
+    # Handle successful save
+    redirect_to order_url(@order), notice: "Order was successfully created."
+  else
+    # Log or handle errors
+    flash.now[:alert] = @order.errors.full_messages.to_sentence
+    render :new
   end
+end
+
 
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
+        format.html { redirect_to order_path(@order), notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }

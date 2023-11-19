@@ -1,16 +1,13 @@
 class OrderLine < ApplicationRecord
-    belongs_to :order
-    belongs_to :item
-  
-    # You can include methods to calculate subtotal or other logic as needed
-    before_save :calculate_subtotal
+  belongs_to :order
+  belongs_to :item  # Assuming there's an item association
 
-    private
-  
-    def calculate_subtotal
-      item = Item.find(item_id)
-      self.subtotal = item.price * quantity
-      # Add additional calculations for tax, etc., if needed
-    end
+  before_save :calculate_subtotal
+
+  private
+
+  def calculate_subtotal
+    # Make sure item.price is not nil and quantity is present
+    self.subtotal = (item.price || 0) * (quantity || 0)
   end
-  
+end
