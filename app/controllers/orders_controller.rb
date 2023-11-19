@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @items = Item.all
-    3.times { @order.order_lines.build }
+    5.times { @order.order_lines.build }
   end
 
   # GET /orders/1/edit
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
 def create
   @order = Order.new(order_params)
   if @order.save
-    @order.update_total_amount  # Call the update_total_amount method here
+    # @order.update_total_amount  # Call the update_total_amount method here
     # Handle successful save
     redirect_to order_url(@order), notice: "Order was successfully created."
   else
