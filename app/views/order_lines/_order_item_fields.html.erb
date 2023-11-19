@@ -1,8 +1,8 @@
 <tr class="nested-fields">
-  <td><%= f.text_field :item_name %></td>
-  <td><%= f.number_field :price %></td>
+  <td><%= f.text_field :item %></td>
   <td><%= f.number_field :quantity %></td>
   <td>
-    <%= link_to 'Remove', '#', class: 'remove-item btn btn-danger btn-sm' %>
+    <%= button_tag 'Remove', type: 'button', class: 'remove-item btn btn-danger btn-sm' %>
   </td>
 </tr>
+

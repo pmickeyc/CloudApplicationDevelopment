@@ -12129,29 +12129,40 @@
   defineJQueryPlugin(Toast);
 
   // app/javascript/application.js
-  document.addEventListener("DOMContentLoaded", () => {
-    const addItemButton = document.getElementById("add-item");
-    if (addItemButton) {
-      addItemButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        var tableBody = document.querySelector("#order-items-table tbody");
-        var newRow = document.createElement("tr");
-        newRow.innerHTML = `
-        <tr class="nested-fields">
-          <td><input type="text" name="order[order_items_attributes][][item_name]"></td>
-          <td><input type="number" name="order[order_items_attributes][][quantity]" value="1"></td>
-          <td><a href="#" class="remove-item btn btn-danger btn-sm">Remove</a></td>
-        </tr>
-      `;
-        tableBody.appendChild(newRow);
-      });
-      document.querySelector("#order-items-table").addEventListener("click", (e) => {
-        if (e.target.classList.contains("remove-item")) {
-          e.preventDefault();
-          e.target.closest("tr").remove();
-        }
-      });
+  document.addEventListener("click", function(event) {
+    if (event.target.classList.contains("remove-item")) {
+      event.preventDefault();
+      let row = event.target.closest(".nested-fields");
+      if (row) {
+        row.remove();
+      }
     }
+  });
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("add-order-line").addEventListener("click", function(event) {
+      event.preventDefault();
+      let tableBody = document.querySelector(".table-responsive tbody");
+      let newRow = document.getElementById("order-line-template").cloneNode(true);
+      newRow.id = "";
+      newRow.style.display = "";
+      newRow.querySelectorAll("input").forEach((input) => {
+        input.value = "";
+        input.name = input.name.replace(
+          /\[\d+\]/,
+          "[" + (tableBody.children.length - 1) + "]"
+        );
+      });
+      tableBody.appendChild(newRow);
+    });
+    document.addEventListener("click", function(event) {
+      if (event.target.classList.contains("remove-item")) {
+        event.preventDefault();
+        let row = event.target.closest(".nested-fields");
+        if (row) {
+          row.remove();
+        }
+      }
+    });
   });
 })();
 /*! Bundled license information:
