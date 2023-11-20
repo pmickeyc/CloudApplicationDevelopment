@@ -1,5 +1,5 @@
-<%= form_with(model: @order, url: order_path(@order), local: true) do |form| %>
-  <%= hidden_field_tag :_method, 'patch' %>
+<%= form_for(@order, url: order_path(@order), method: :patch) do |form| %>
+  <!-- Your form fields here -->
   <div>
     <%= form.label :transaction_date %>
     <%= form.date_field :transaction_date %>
@@ -18,13 +18,6 @@
         <%= form.fields_for :order_lines do |order_line_form| %>
           <%= render 'order_lines/order_item_fields', f: order_line_form %>
         <% end %>
-        <tr id="order-line-template" class="nested-fields" style="display: none;">
-          <td><%= form.text_field :item, name: 'order[order_lines_attributes][][item]' %></td>
-          <td><%= form.number_field :quantity, name: 'order[order_lines_attributes][][quantity]' %></td>
-          <td>
-            <%= button_tag 'Remove', type: 'button', class: 'remove-item btn btn-danger btn-sm' %>
-          </td>
-        </tr>
       </tbody>
     </table>
   </div>
