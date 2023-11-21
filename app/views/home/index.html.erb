@@ -1,11 +1,43 @@
-<h1>Welcome to the Homepage</h1>
-<div id="page-content">
-  <div class="container" id="home-container">
-    <div class="jumbotron text-center text-white">
-      <h1 class="display-4">POS</h1>
-      <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-      <hr class="my-4">
-      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+<div class="container mt-4">
+  <h1>Welcome to Padraig McCauley's POS System</h1>
+  <p>Student ID: 20123744</p>
+  <p>This Point of Sale system is designed to allow users to manage sales efficiently from one central point. It provides comprehensive tools for handling items, orders, and analytics. Below is a brief overview of the features available on each page:</p>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Item Management</h2>
+      <p>In the <strong>Item</strong> section, you can:</p>
+      <ul>
+        <li>Add new items</li>
+        <li>View all items</li>
+        <li>Update existing items</li>
+        <li>Delete items</li>
+      </ul>
+      <%= link_to 'Manage Items', items_path, class: 'btn btn-primary' %>
+    </div>
+
+    <div class="col-md-4">
+      <h2>Order Management</h2>
+      <p>In the <strong>Order</strong> section, you can:</p>
+      <ul>
+        <li>Create new orders</li>
+        <li>View order details</li>
+        <li>Edit and update orders</li>
+        <li>Remove orders from the system</li>
+      </ul>
+      <%= link_to 'Manage Orders', orders_path, class: 'btn btn-primary' %>
+    </div>
+
+    <div class="col-md-4">
+      <h2>Analytics</h2>
+      <p>In the <strong>Analytics</strong> section, you can:</p>
+      <ul>
+        <li>Filter and view order data</li>
+        <li>Analyze item sales</li>
+        <li>Review order trends over time</li>
+        <li>Gain insights from data analysis</li>
+      </ul>
+      <%= link_to 'View Analytics', analytics_path, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>

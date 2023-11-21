@@ -11,37 +11,92 @@ p{
     color: black !important;
 }
 
+.navbar-brand{
+    color: white !important;
+}
+
+.navbar {
+    background-color: #FDF6EA !important;
+    background-color: black !important;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.navbar-toggler .custom-icon {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: white;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.navbar-toggler .custom-icon::before,
+.navbar-toggler .custom-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+}
+
+.navbar-toggler .custom-icon::before {
+    top: -8px;
+}
+
+.navbar-toggler .custom-icon::after {
+    top: 8px;
+}
+
 .page-title{
     text-align: center;
     padding-top: 5rem;
 }
 
-/* Compact Table Styles */
 .table-compact {
-    width: 100%; /* Full-width table */
-    table-layout: fixed; /* Fixed layout for consistent column sizing */
+    width: 100%;
+    table-layout: fixed;
 }
 
 .table-compact th,
 .table-compact td {
-    padding: 8px; /* Reduced padding for compactness */
-    text-align: left; /* Align text to the left */
-    overflow: hidden; /* Hide overflow text */
-    text-overflow: ellipsis; /* Add ellipsis for overflow text */
-    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    padding: 8px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .table-compact th {
-    min-width: 100px; /* Minimum width for header cells */
-    max-width: 200px; /* Maximum width for header cells */
+    min-width: 100px;
+    max-width: 200px;
 }
 
 .table-compact .action-cell {
-    width: 120px; /* Fixed width for action column */
+    width: 120px;
 }
 
-/* Adjust font size if necessary */
 .table-compact th,
 .table-compact td {
-    font-size: 0.9em; /* Smaller font size */
+    font-size: 0.9em;
+}
+
+.filters-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-section label {
+    margin-bottom: 5px;
 }
