@@ -2,7 +2,7 @@ name: Pull Code on Main Push
 on:
   push:
     branches:
-      - ${{ secrets.MAIN_BRANCH }}
+      - main  # Replace 'main' with your branch name or add more branches as needed
   workflow_dispatch:
 
 jobs:
