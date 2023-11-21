@@ -24,6 +24,7 @@ jobs:
         run: ssh -o StrictHostKeyChecking=no user@${{ secrets.SSH_HOST }} "cd ~/repo/CloudApplicationDevelopment && git pull"
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          permissions: write-all
 
       - name: Cleanup SSH
         run: rm -rf ~/.ssh/
