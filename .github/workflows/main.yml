@@ -21,7 +21,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
       - name: SSH into Linux Server and Pull Code
-        run: ssh -o StrictHostKeyChecking=no root@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git pull"
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
