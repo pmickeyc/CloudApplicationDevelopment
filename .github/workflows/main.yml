@@ -20,8 +20,13 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
+      - name: Stop Rails Server
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "pkill -f 'rails s'"
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
       - name: SSH into Linux Server and Pull Code
-        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }}/CloudApplicationDevelopment && git pull && rails asset:precompile && rails s"
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
