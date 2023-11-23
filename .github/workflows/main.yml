@@ -2,7 +2,7 @@ name: Pull Code on Main Push
 on:
   push:
     branches:
-      - main  # Replace 'main' with your branch name or add more branches as needed
+      - main  
   workflow_dispatch:
 
 jobs:
@@ -14,8 +14,8 @@ jobs:
       - name: Setup SSH for GitHub
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
