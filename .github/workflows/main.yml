@@ -18,8 +18,7 @@ jobs:
 
       - name: Clone Repository using SSH
         run: |
-          GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes' git pull git@github.com:pmickeyc/CloudApplicationDevelopment.git
-          cd CloudApplicationDevelopment
+          GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
           # Add additional Git commands here if needed
 
       - name: Cleanup SSH
