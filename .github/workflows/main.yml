@@ -17,8 +17,7 @@ jobs:
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
       - name: Clone Repository using SSH
-        run: |
-          GIT_SSH_COMMAND='ssh -vvv -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes' "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
+        run: ssh -vvv -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
           env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
