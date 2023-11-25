@@ -1,13 +1,11 @@
-name: Pull Code on Main Push
+name: Clone and Operate on Repository
 on:
   push:
     branches:
-      - main  
-  workflow_dispatch: 
+      - main
 
 jobs:
-  pull_code:
-    name: Pull Code
+  clone_repo:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,10 +14,13 @@ jobs:
           mkdir -p ~/.ssh/
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
-      - name: SSH into Linux Server and Pull Code
-        run: ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
+      - name: Clone Repository using SSH
+        run: |
+          GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes' git pull git@github.com:pmickeyc/CloudApplicationDevelopment.git
+          cd CloudApplicationDevelopment
+          # Add additional Git commands here if needed
 
       - name: Cleanup SSH
         run: rm -rf ~/.ssh/
