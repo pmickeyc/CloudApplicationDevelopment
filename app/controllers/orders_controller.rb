@@ -23,8 +23,7 @@ class OrdersController < ApplicationController
     @items = Item.all
   end
 
-  # POST /orders or /orders.json
-  # POST /orders or /orders.json
+
 def create
   @order = Order.new(order_params)
   if @order.save
@@ -38,8 +37,18 @@ def create
   end
 end
 
+def send_order_details
+  @order = Order.find(params[:id])
+  recipient_email = params[:recipient_email]
+  html_content = render_to_string(partial: "orders/order_details", locals: { order: @order })
+  HtmlMailer.send_html_email(html_content, recipient_email, "Order Details")
 
-  # PATCH/PUT /orders/1 or /orders/1.json
+  redirect_to order_path(@order), notice: 'Order details sent successfully.'
+rescue => e
+  redirect_to order_path(@order), alert: "Failed to send order details: #{e.message}"
+end
+
+
   def update
     respond_to do |format|
       if @order.update(order_params)
@@ -52,7 +61,7 @@ end
     end
   end
 
-  # DELETE /orders/1 or /orders/1.json
+
   def destroy
     @order.destroy
 
@@ -63,12 +72,10 @@ end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def order_params
       params.require(:order).permit(
         :transaction_date, 

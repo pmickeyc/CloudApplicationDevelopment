@@ -1,3 +1,8 @@
+PATH
+  remote: customGem/html_mailer
+  specs:
+    html_mailer (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -225,6 +230,7 @@ DEPENDENCIES
   cocoon
   cssbundling-rails
   debug
+  html_mailer!
   jbuilder
   jquery-rails
   jsbundling-rails

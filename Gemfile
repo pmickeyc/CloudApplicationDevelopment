@@ -33,6 +33,8 @@ gem "jbuilder"
 gem 'jquery-rails'
 gem 'cocoon'
 
+gem 'html_mailer', path: './customGem/html_mailer'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

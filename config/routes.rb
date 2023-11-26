@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get 'analytics', to: 'analytics#index'
   post 'analytics/filter_by_item', to: 'analytics#filter_by_item'
   post 'analytics/filter_by_date', to: 'analytics#filter_by_date'
+  # config/routes.rb
+  post '/orders/:id/send_details', to: 'orders#send_order_details', as: :send_order_details
+
 
 end
 
