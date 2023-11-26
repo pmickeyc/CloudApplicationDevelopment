@@ -6,3 +6,5 @@ source "https://rubygems.org"
 gemspec
 
 gem "rake", "~> 13.0"
+
+spec.files = Dir["lib/**/*.rb", "LICENSE", "README.md"]
