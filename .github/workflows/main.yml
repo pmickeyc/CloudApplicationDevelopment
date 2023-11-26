@@ -1,30 +1,23 @@
-name: Pull Code on Main Push
 on:
   push:
     branches:
-      - main  # Replace 'main' with your branch name or add more branches as needed
+      - main
   workflow_dispatch:
-
+  
 jobs:
-  pull_code:
-    name: Pull Code
+  run_pull:
+    name: run pull
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Setup SSH for GitHub
-        run: |
-          mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-
-      - name: SSH into Linux Server and Pull Code
-        run: ssh -o StrictHostKeyChecking=no user@${{ secrets.SSH_HOST }} "cd ~/repo/CloudApplicationDevelopment && git pull"
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-          permissions: write-all
-
-      - name: Cleanup SSH
-        run: rm -rf ~/.ssh/
+    - name: install ssh keys
+      # check this thread to understand why its needed:
+      # https://stackoverflow.com/a/70447517
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+    - name: connect and pull
+      run: ssh -vvv -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd directory && git checkout branch && git pull && exit"
+    - name: cleanup
+      run: rm -rf ~/.ssh
