@@ -32,6 +32,7 @@ gem "jbuilder"
 
 gem 'jquery-rails'
 gem 'cocoon'
+gem 'wisper'
 
 gem 'html_mailer', path: './customGem/html_mailer'
 
