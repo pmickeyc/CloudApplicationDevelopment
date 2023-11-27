@@ -25,11 +25,6 @@ jobs:
         env:
           GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
-      - name: CD
-        run: "cd /root/GITHUB"
-        env:
-          GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
-
       - name: Cleanup SSH
         run: rm -rf ~/.ssh/
         env:
