@@ -21,7 +21,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
       - name: Clone repository using SSH
-        run: git clone git@github.com:pmickeyc/CloudApplicationDevelopment.git
+        run: git pull
         env:
           GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
