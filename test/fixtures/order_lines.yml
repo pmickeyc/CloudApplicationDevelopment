@@ -1,15 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  item: MyString
+  id: 1
+  item: one # assuming this references the Items fixture
   quantity: 1
-  discount_percentage: 9.99
-  tax_amount: 9.99
-  price_after_discount: 9.99
 
 two:
-  item: MyString
+  id: 2
+  item: two # assuming this references the Items fixture
   quantity: 1
-  discount_percentage: 9.99
-  tax_amount: 9.99
-  price_after_discount: 9.99

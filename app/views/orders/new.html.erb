@@ -4,28 +4,36 @@
     <%= form.date_field :transaction_date %>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered">
-      <!-- ... table headers ... -->
-      <tbody>
-        <% if @items.present? %>
+  <% if @items.present? %>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
           <%= form.fields_for :order_lines do |order_line_form| %>
             <%= render 'order_lines/order_item_fields', f: order_line_form, items: @items %>
           <% end %>
-        <% end %>
-        <!-- Note: Leave the template row inputs without the 'name' attribute -->
-        <tr id="order-line-template" class="nested-fields" style="display: none;">
-          <td><%= form.collection_select :item_id, @items, :id, :name, { prompt: "Select an Item" }, class: "form-control" %></td>
-          <td><%= form.number_field :quantity %></td>
-          <td>
-            <%= button_tag 'Remove', type: 'button', class: 'remove-item btn btn-danger btn-sm' %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          
+          <tr id="order-line-template" class="nested-fields" style="display: none;">
+            <td><%= form.collection_select :item_id, @items, :id, :name, { prompt: "Select an Item" }, class: "form-control" %></td>
+            <td><%= form.number_field :quantity %></td>
+            <td>
+              <%= button_tag 'Remove', type: 'button', class: 'remove-item btn btn-danger btn-sm' %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <%= link_to 'Add Order Line', '#', id: 'add-order-line', class: 'btn btn-secondary' %>
+    <%= link_to 'Add Order Line', '#', id: 'add-order-line', class: 'btn btn-secondary' %>
+  <% else %>
+    <p>No items available to add to the order.</p>
+  <% end %>
 
   <%= form.submit %>
 <% end %>

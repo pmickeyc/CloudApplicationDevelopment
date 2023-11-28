@@ -2,6 +2,8 @@ class Order < ApplicationRecord
   has_many :order_lines, dependent: :destroy
   accepts_nested_attributes_for :order_lines, allow_destroy: true
 
+  validates :transaction_date, presence: true
+
   before_save :calculate_total_amount
   after_save :update_total_amount
 

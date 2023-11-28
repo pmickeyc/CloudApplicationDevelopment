@@ -12154,6 +12154,18 @@
         tableBody.appendChild(newRow);
       });
     }
+    document.addEventListener("turbolinks:load", function() {
+      const form = document.querySelector("form");
+      if (form) {
+        form.addEventListener("submit", function(event) {
+          const transactionDate = document.getElementById("transaction_date").value;
+          if (!transactionDate) {
+            event.preventDefault();
+            alert("Please fill out the transaction date.");
+          }
+        });
+      }
+    });
     var sendButton = document.getElementById("send-order-details-button");
     if (sendButton) {
       sendButton.addEventListener("click", function() {
