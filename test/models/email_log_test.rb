@@ -11,26 +11,26 @@ class EmailLogTest < ActiveSupport::TestCase
   end
 
   test "should be valid" do
-    assert email_log.valid?
+    assert @email_log.valid?
   end
 
   test "recipient_email should be present" do
-    email_log.recipient_email = nil
-    assert_not email_log.valid?
+    @email_log.recipient_email = nil
+    assert_not @email_log.valid?
   end
 
   test "email_subject should be present" do
-    email_log.email_subject = nil
-    assert_not email_log.valid?
+    @email_log.email_subject = nil
+    assert_not @email_log.valid?
   end
 
   test "body should be present" do
-    email_log.body = nil
-    assert_not email_log.valid?
+    @email_log.body = nil
+    assert_not @email_log.valid?
   end
 
   test "sent_at should be present" do
-    email_log.sent_at = nil
-    assert_not email_log.valid?
+    @email_log.sent_at = nil
+    assert_not @email_log.valid?
   end
 end

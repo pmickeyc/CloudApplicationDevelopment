@@ -2,7 +2,7 @@ require "test_helper"
 
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @order = orders(:one)
+    @order = orders(:one) # assuming you have a fixture for orders
   end
 
   test "should get index" do
@@ -17,7 +17,12 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create order" do
     assert_difference("Order.count") do
-      post orders_url, params: { order: { total_amount: @order.total_amount, total_tax: @order.total_tax, transaction_date: @order.transaction_date } }
+      post orders_url, params: { 
+        order: { 
+          transaction_date: Date.today, 
+          total_amount: 20.00 
+        } 
+      }
     end
 
     assert_redirected_to order_url(Order.last)
@@ -34,7 +39,12 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order" do
-    patch order_url(@order), params: { order: { total_amount: @order.total_amount, total_tax: @order.total_tax, transaction_date: @order.transaction_date } }
+    patch order_url(@order), params: { 
+      order: { 
+        transaction_date: Date.tomorrow, 
+        total_amount: 25.00 
+      } 
+    }
     assert_redirected_to order_url(@order)
   end
 

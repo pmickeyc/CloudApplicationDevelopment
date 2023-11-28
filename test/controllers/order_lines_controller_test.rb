@@ -2,7 +2,7 @@ require "test_helper"
 
 class OrderLinesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @order_line = order_lines(:one)
+    @order_line = order_lines(:one) # assuming you have fixtures
   end
 
   test "should get index" do
@@ -14,12 +14,17 @@ class OrderLinesControllerTest < ActionDispatch::IntegrationTest
     get new_order_line_url
     assert_response :success
   end
-
   test "should create order_line" do
     assert_difference("OrderLine.count") do
-      post order_lines_url, params: { order_line: { discount_percentage: @order_line.discount_percentage, item: @order_line.item, price_after_discount: @order_line.price_after_discount, quantity: @order_line.quantity, tax_amount: @order_line.tax_amount } }
+      post order_lines_url, params: { 
+        order_line: { 
+          quantity: 2,
+          order_id: orders(:one).id, # assuming you have an orders fixture
+          item_id: items(:one).id # assuming you have an items fixture
+        } 
+      }
     end
-
+  
     assert_redirected_to order_line_url(OrderLine.last)
   end
 
@@ -34,7 +39,13 @@ class OrderLinesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order_line" do
-    patch order_line_url(@order_line), params: { order_line: { discount_percentage: @order_line.discount_percentage, item: @order_line.item, price_after_discount: @order_line.price_after_discount, quantity: @order_line.quantity, tax_amount: @order_line.tax_amount } }
+    patch order_line_url(@order_line), params: { 
+      order_line: { 
+        quantity: 3,
+        order_id: orders(:one).id,
+        item_id: items(:one).id
+      } 
+    }
     assert_redirected_to order_line_url(@order_line)
   end
 

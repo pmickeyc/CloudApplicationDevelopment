@@ -4,6 +4,7 @@ class OrderLine < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { greater_than: 0 }
   validates_associated :item
+  validates :item_id, presence: true
 
   before_save :calculate_subtotal
   
