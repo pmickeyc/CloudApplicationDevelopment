@@ -34,6 +34,7 @@ gem 'jquery-rails'
 gem 'cocoon'
 gem 'wisper'
 gem 'brakeman'
+
 gem 'bundler-audit'
 gem 'ruby_audit'
 gem 'pg'
