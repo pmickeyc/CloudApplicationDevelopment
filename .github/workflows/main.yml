@@ -17,4 +17,6 @@ jobs:
             cd ${{ secrets.WORK_DIR }}
             git checkout ${{ secrets.MAIN_BRANCH }}
             git pull
+            bundle install
+            rails db:migrate
             exit
