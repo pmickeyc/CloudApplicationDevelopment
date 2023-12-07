@@ -11,6 +11,10 @@ jobs:
           with:
             bundler-cache: true
         # Add or replace any other lints here
+        - name: Set permissions on rails
+          run: chmod +x bin/rails
+        - name: Run rails test
+          run: bin/rails test
         - name: Tests
           run: bin/rails test --update
         - name: Security audit application code
