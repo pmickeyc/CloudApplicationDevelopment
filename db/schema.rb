@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_26_170722) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_07_222408) do
   create_table "email_logs", force: :cascade do |t|
     t.string "recipient_email"
     t.string "email_subject"
@@ -44,6 +44,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170722) do
   create_table "orders", force: :cascade do |t|
     t.date "transaction_date"
     t.decimal "total_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

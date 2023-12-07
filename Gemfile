@@ -33,6 +33,12 @@ gem "jbuilder"
 gem 'jquery-rails'
 gem 'cocoon'
 gem 'wisper'
+gem 'brakeman'
+gem 'bundler-audit'
+gem 'ruby_audit'
+gem 'pg'
+gem 'rubocop-rails'
+gem 'rubocop'
 
 gem 'html_mailer', path: './customGem/html_mailer'
 
