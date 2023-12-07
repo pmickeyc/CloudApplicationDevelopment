@@ -14,8 +14,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
-            whoami
-            ls -al
             cd ${{ secrets.WORK_DIR }}
             git checkout ${{ secrets.MAIN_BRANCH }}
             git pull
