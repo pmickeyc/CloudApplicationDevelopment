@@ -1,4 +1,4 @@
-name: Pull Code on Main Push
+name: Run Pull on Main Push
 on:
   push:
     branches:
@@ -6,28 +6,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  pull_code:
-    name: Pull Code
+  run_pull:
+    name: Run Pull
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup SSH
+      - name: Install SSH Keys
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          chmod 700 ~/.ssh
-          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+          echo -e "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
 
-      - name: Test SSH Connection
-        run: ssh -T git@github.com
-        env:
-          GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+      - name: Connect and Pull
+        run: ssh -vvv ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
 
-      - name: Clone repository using SSH
-        run: git clone git@github.com:pmickeyc/CloudApplicationDevelopment.git
-        env:
-          GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
-
-      - name: Cleanup SSH
-        run: rm -rf ~/.ssh/
+      - name: Cleanup
+        run: rm -rf ~/.ssh
