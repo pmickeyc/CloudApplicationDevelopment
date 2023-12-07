@@ -1,24 +1,40 @@
 name: remote ssh command
-#on: [push]
+on: [push]
 jobs:
+    lint:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        - name: Install Ruby and gems
+          uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+          with:
+            bundler-cache: true
+        # Add or replace any other lints here
+        - name: Security audit dependencies
+          run: bin/bundler-audit --update
+        - name: Security audit application code
+          run: bin/brakeman -q -w2
+        - name: Lint Ruby files
+          run: bin/rubocop --parallel
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.PASSWORD }}
-          port: 22
-          script: |
-            export PATH="$HOME/.rbenv/bin:$PATH"
-            eval "$(rbenv init -)"
-            cd ${{ secrets.WORK_DIR }}
-            git checkout ${{ secrets.MAIN_BRANCH }}
-            git pull
-            ./deploy.sh
-            exit
-
+    build:
+      name: Build
+      runs-on: ubuntu-latest
+      steps:
+        - name: executing remote ssh commands using ssh key
+          uses: appleboy/ssh-action@v1.0.0
+          with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USER }}
+            password: ${{ secrets.PASSWORD }}
+            port: 22
+            script: |
+              export PATH="$HOME/.rbenv/bin:$PATH"
+              eval "$(rbenv init -)"
+              cd ${{ secrets.WORK_DIR }}
+              git checkout ${{ secrets.MAIN_BRANCH }}
+              git pull
+              ./deploy.sh
+              exit
+  
