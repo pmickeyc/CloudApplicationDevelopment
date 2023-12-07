@@ -7,7 +7,42 @@ one:
 
 two:
   id: 2
-  name: MyString
+  name: MyString2
   price: 9.99
   tax_rate: 9.99
-  description: MyString
+  description: MyString2
+
+three:
+  id: 3
+  name: MyString3
+  price: 46.89
+  tax_rate: 14.28
+  description: MyString3
+
+four:
+  id: 4
+  name: MyString4
+  price: 77.60
+  tax_rate: 19.32
+  description: MyString4
+
+five:
+  id: 5
+  name: yString5
+  price: 39.45
+  tax_rate: 9.39
+  description: MyString5
+
+six:
+  id: 6
+  name: MyString6
+  price: 38.85
+  tax_rate: 5.6
+  description: MyString6
+
+seven:
+  id: 7
+  name: MyString7
+  price: 85.03
+  tax_rate: 16.33
+  description: MyString7

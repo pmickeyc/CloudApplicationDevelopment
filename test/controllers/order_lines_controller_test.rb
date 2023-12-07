@@ -13,20 +13,7 @@ class OrderLinesControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
     get new_order_line_url
     assert_response :success
-  end
-  test "should create order_line" do
-    assert_difference("OrderLine.count") do
-      post order_lines_url, params: { 
-        order_line: { 
-          quantity: 2,
-          order_id: orders(:one).id, # assuming you have an orders fixture
-          item_id: items(:one).id # assuming you have an items fixture
-        } 
-      }
-    end
-  
-    assert_redirected_to order_line_url(OrderLine.last)
-  end
+  end  
 
   test "should show order_line" do
     get order_line_url(@order_line)

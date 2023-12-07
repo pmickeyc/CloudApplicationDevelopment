@@ -47,4 +47,15 @@ class ItemTest < ActiveSupport::TestCase
     @item.description = "a" * 501 
     assert_not @item.valid?
   end
+
+  test "price should be numeric" do
+    @item.price = "not-a-number"
+    assert_not @item.valid?, "Item is valid with a non-numeric price"
+  end
+
+  test "tax_rate should be numeric" do
+    @item.tax_rate = "not-a-number"
+    assert_not @item.valid?, "Item is valid with a non-numeric tax_rate"
+  end  
+
 end
