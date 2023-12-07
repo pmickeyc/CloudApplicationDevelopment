@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class AnalyticsController < ApplicationController
   def index
     @orders = Order.all
-    
+
     @item_names = OrderLine.joins(:item).distinct.pluck('items.name')
 
     # Filter by item
@@ -10,8 +12,8 @@ class AnalyticsController < ApplicationController
     end
 
     # Filter by date
-    if params[:date].present?
-      @orders = @orders.where('transaction_date = ?', Date.parse(params[:date]))
-    end
+    return unless params[:date].present?
+
+    @orders = @orders.where('transaction_date = ?', Date.parse(params[:date]))
   end
 end
