@@ -40,6 +40,8 @@ gem 'pg'
 gem 'rubocop-rails'
 gem 'rubocop'
 
+
+
 gem 'html_mailer', path: './customGem/html_mailer'
 
 # Use Redis adapter to run Action Cable in production
