@@ -14,11 +14,8 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
-            "killall -9 rails"
             cd ${{ secrets.WORK_DIR }}
             git checkout ${{ secrets.MAIN_BRANCH }}
             git pull
-            "bundle install"
-            "rails db:migrate"
-            "rails s"
+            ./deploy.sh
             exit
