@@ -14,9 +14,11 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
-            source ~/.bashrc
+            export PATH="$HOME/.rbenv/bin:$PATH"
+            eval "$(rbenv init -)"
             cd ${{ secrets.WORK_DIR }}
             git checkout ${{ secrets.MAIN_BRANCH }}
             git pull
             ./deploy.sh
             exit
+
