@@ -37,7 +37,7 @@ gem 'brakeman'
 
 gem 'bundler-audit'
 gem 'ruby_audit'
-gem 'pg'
+
 gem 'rubocop-rails'
 gem 'rubocop'
 
