@@ -16,17 +16,16 @@ jobs:
           mkdir -p ~/.ssh/
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+          chmod 700 ~/.ssh
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
-      - name: Clone repository using SSH
-        run: git clone git@github.com:pmickeyc/CloudApplicationDevelopment.git
+      - name: Test SSH Connection
+        run: ssh -T git@github.com
         env:
           GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
-      - name: Cleanup SSH
-        run: rm -rf ~/.ssh/
+      - name: Clone repository using SSH
+        run: git clone git@github.com:pmickeyc/CloudApplicationDevelopment.git
         env:
           GIT_SSH_COMMAND: 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
