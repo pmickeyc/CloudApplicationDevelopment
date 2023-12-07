@@ -1,24 +1,27 @@
 name: remote ssh command
-#on: [push]
+on: [push]
 jobs:
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.PASSWORD }}
-          port: 22
-          script: |
-            export PATH="$HOME/.rbenv/bin:$PATH"
-            eval "$(rbenv init -)"
-            cd ${{ secrets.WORK_DIR }}
-            git checkout ${{ secrets.MAIN_BRANCH }}
-            git pull
-            ./deploy.sh
-            exit
-
+    build:
+      name: Build
+      runs-on: ubuntu-latest
+      steps:
+        - name: executing remote ssh commands using ssh key
+          uses: appleboy/ssh-action@v1.0.0
+          with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USER }}
+            password: ${{ secrets.PASSWORD }}
+            port: 22
+            script: |
+              export PATH="$HOME/.rbenv/bin:$PATH"
+              eval "$(rbenv init -)"
+              cd ${{ secrets.WORK_DIR }}
+              git checkout ${{ secrets.MAIN_BRANCH }}
+              git pull
+              rails test
+              rake
+              brakeman -q -w2
+              rubocop --parallel
+              ./deploy.sh
+              exit
+  
