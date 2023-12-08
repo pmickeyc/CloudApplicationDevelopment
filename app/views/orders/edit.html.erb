@@ -2,7 +2,7 @@
   <!-- Your form fields here -->
   <div>
     <%= form.label :transaction_date %>
-    <%= form.date_field :transaction_date %>
+    <%= form.date_field :transaction_date, class: 'form-control' %>
   </div>
 
   <div class="table-responsive">
@@ -23,8 +23,8 @@
   </div>
 
   <p>
-    <%= link_to 'Add Order Line', '#', id: 'add-order-line', class: 'btn btn-secondary' %>
+    <%= link_to 'Add Order Line', '#', id: 'add-order-line', class: 'btn btn-primary' %>
   </p>
 
-  <%= form.submit %>
+  <%= form.submit 'Submit', class: 'btn btn-primary' %>
 <% end %>

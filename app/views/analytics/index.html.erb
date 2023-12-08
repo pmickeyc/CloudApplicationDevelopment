@@ -2,8 +2,13 @@
   <%= form_tag analytics_path, method: :get, class: "row g-3 align-items-end mb-4" do %>
 
     <div class="col-md-4">
-      <label for="date" class="form-label">Filter by Date:</label>
-      <%= date_field_tag :date, params[:date], class: "form-control" %>
+      <label for="start_date" class="form-label">Start Date:</label>
+      <%= date_field_tag :start_date, params[:start_date], class: "form-control" %>
+    </div>
+
+    <div class="col-md-4">
+      <label for="end_date" class="form-label">End Date:</label>
+      <%= date_field_tag :end_date, params[:end_date], class: "form-control" %>
     </div>
 
     <div class="col-md-4">
@@ -11,6 +16,7 @@
     </div>
   <% end %>
 </div>
+
 
 <% @orders.each do |order| %>
   <div class="container mb-4"> 
