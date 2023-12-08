@@ -1,9 +1,5 @@
 <div class="d-flex justify-content-center">
   <%= form_tag analytics_path, method: :get, class: "row g-3 align-items-end mb-4" do %>
-    <div class="col-md-4">
-      <label for="item" class="form-label">Filter by Item:</label>
-      <%= select_tag :item, options_for_select([['Select Item', nil]] + @item_names), include_blank: true, class: "form-select" %>
-    </div>
 
     <div class="col-md-4">
       <label for="date" class="form-label">Filter by Date:</label>
