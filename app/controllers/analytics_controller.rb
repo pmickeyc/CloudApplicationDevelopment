@@ -2,6 +2,7 @@
 class AnalyticsController < ApplicationController
   def index
     @orders = Order.all
+    @email_logs = EmailLog.all.order(sent_at: :desc)
 
     @item_names = OrderLine.joins(:item).distinct.pluck('items.name')
 
