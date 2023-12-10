@@ -13,9 +13,9 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
-    @items = Item.all
-    5.times { @order.order_lines.build }
+  @order = Order.new(transaction_date: Date.current)
+  @items = Item.all
+    1.times { @order.order_lines.build }
   end
 
   # GET /orders/1/edit
