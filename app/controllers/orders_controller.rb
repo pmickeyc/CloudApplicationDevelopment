@@ -19,10 +19,13 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1/edit
+  # In your OrdersController#edit action
   def edit
     @order = Order.find(params[:id])
-    @items = Item.all
+    @items = Item.all # Assuming @items is needed for item selection
+    # @new_order_line = @order.order_lines.build # Create a new OrderLine object
   end
+
 
   def create
     @order = Order.new(order_params)

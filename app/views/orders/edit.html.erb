@@ -1,5 +1,5 @@
 <%= form_for(@order, url: order_path(@order), method: :patch) do |form| %>
-  <!-- Your form fields here -->
+
   <div>
     <%= form.label :transaction_date %>
     <%= form.date_field :transaction_date, class: 'form-control' %>
@@ -11,12 +11,22 @@
         <tr>
           <th>Item Name</th>
           <th>Quantity</th>
-          <!-- Add more headers as needed -->
         </tr>
       </thead>
       <tbody>
         <%= form.fields_for :order_lines do |order_line_form| %>
           <%= render 'order_lines/order_item_fields', f: order_line_form %>
+        <% end %>
+
+        <!-- Hidden template for new order lines -->
+        <%= form.fields_for :order_lines, OrderLine.new, child_index: '__INDEX__' do |order_line_form| %>
+          <tr id="order-line-template" class="nested-fields" style="display: none;">
+            <td><%= order_line_form.collection_select :item_id, @items, :id, :name, { prompt: "Select an Item" }, class: "form-control" %></td>
+            <td><%= order_line_form.number_field :quantity, class: "form-control" %></td>
+            <td>
+              <%= button_tag 'Remove', type: 'button', class: 'remove-item btn btn-danger btn-sm' %>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>

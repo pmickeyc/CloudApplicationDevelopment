@@ -20,8 +20,8 @@
           <% end %>
           
           <tr id="order-line-template" class="nested-fields" style="display: none;">
-            <td><%= form.collection_select :item_id, @items, :id, :name, { prompt: "Select an Item" }, class: "form-control" %></td>
-            <td><%= form.number_field :quantity %></td>
+            <td><%= form.collection_select :item_id, @items, :id, :name, { prompt: "Select an Item" }, { name: "order[order_lines_attributes][__INDEX__][item_id]", class: "form-control" } %></td>
+            <td><%= form.number_field :quantity, name: "order[order_lines_attributes][__INDEX__][quantity]", class: "form-control" %></td>
             <td>
               <%= button_tag 'Remove', type: 'button', class: 'remove-item btn btn-danger btn-sm' %>
             </td>
